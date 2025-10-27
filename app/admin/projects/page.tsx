@@ -98,7 +98,7 @@ export default function AdminProjectsPage() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-pine mb-2">{project.title}</h3>
-                    <p className="text-moss line-clamp-2 mb-4">{project.description}</p>
+                    <p className="text-moss line-clamp-2 mb-4">{project.excerpt}</p>
                     <div className="flex gap-2">
                       {project.tech_stack.slice(0, 3).map((tech) => (
                         <span
@@ -116,8 +116,8 @@ export default function AdminProjectsPage() {
                     </div>
                   </div>
                   <div className="flex gap-2 ml-4">
-                    {project.project_url && (
-                      <a href={project.project_url} target="_blank" rel="noopener noreferrer">
+                    {project.live_url && (
+                      <a href={project.live_url} target="_blank" rel="noopener noreferrer">
                         <Button variant="ghost" size="sm">
                           <Eye className="w-4 h-4" />
                         </Button>
