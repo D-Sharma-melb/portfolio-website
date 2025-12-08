@@ -21,6 +21,8 @@ async function getAllProjects(): Promise<Project[]> {
 
   if (error) {
     console.error('Error fetching projects:', error);
+    console.error('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
+    console.error('Has anon key:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
     return [];
   }
 
@@ -32,26 +34,27 @@ export default async function ProjectsPage() {
 
   return (
     <Section className="pt-32">
-      <div className="mb-16">
-        <h1 className="text-5xl md:text-6xl font-bold text-pine mb-4">
-          All Projects
-        </h1>
-        <p className="text-xl text-moss">
-          A comprehensive collection of my work
-        </p>
-      </div>
-
-      {projects.length === 0 ? (
-        <div className="text-center py-20">
-          <p className="text-2xl text-moss">No projects yet</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index}  />
-          ))}
-        </div>
-      )}
-    </Section>
+          <div className="mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold text-pine mb-4">
+              Projects
+            </h1>
+            <p className="text-xl text-moss">
+              Thoughts, tutorials, and insights
+            </p>
+          </div>
+    
+          {projects.length === 0 ? (
+            <div className="text-center py-20 bg-cream/30 rounded-2xl">
+              <p className="text-2xl text-moss mb-2">No projects yet</p>
+              <p className="text-sage">Check back soon for new content!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} />
+              ))}
+            </div>
+          )}
+        </Section>
   );
 }
