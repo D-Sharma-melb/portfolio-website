@@ -48,7 +48,7 @@ export default function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   }
 
   return (
-    <Section id="projects" className="bg-cream/30 pt-8">
+    <Section id="projects" className="bg-cream/30 !pt-0 md:!pt-0">
       <div className="mb-12">
         <div className="mb-4">
           <h2 className="text-5xl md:text-6xl font-bold text-pine mb-4">
