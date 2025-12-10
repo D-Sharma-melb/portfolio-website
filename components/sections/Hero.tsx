@@ -54,22 +54,19 @@ const floatingAnimation = {
 
 export default function Hero() {
   return (
-    <Section className="min-h-screen flex items-center pt-20 pb-4">
+    <Section className="h-screen flex items-center pt-16 pb-4">
       <div className="w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 items-start lg:items-center">
           {/* Left Column - Text Content */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-8"
+            className="space-y-4"
           >
             {/* Greeting */}
             <motion.div variants={itemVariants}>
-              <span className="inline-block px-6 py-3 bg-sage/20 text-forest rounded-full text-lg md:text-xl font-medium mb-4">
-                👋 Hello, I'm
-              </span>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-pine leading-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-pine leading-tight">
                 Divyam Sharma
               </h1>
             </motion.div>
@@ -77,58 +74,60 @@ export default function Hero() {
             {/* Subheading */}
             <motion.h2
               variants={itemVariants}
-              className="text-2xl md:text-3xl font-semibold text-forest leading-snug"
+              className="text-lg md:text-xl lg:text-2xl font-semibold text-forest leading-snug"
             >
               Final-year Computer Science student & aspiring Full-Stack / ML Developer
             </motion.h2>
 
             {/* Intro Paragraph */}
+            <div className="bg-white rounded-2xl p-8 border-2 border-cream shadow-lg">
             <motion.p
               variants={itemVariants}
-              className="text-lg md:text-xl text-moss leading-relaxed"
+              className="text-sm md:text-base text-moss leading-relaxed"
             >
-              I'm a final-year Computer Science student at La Trobe University who enjoys building end-to-end products from responsive UIs to scalable backends. My main stack is React, Node.js, and JavaScript, and I've also built machine learning and deep learning projects like Stock Sentiment Analyser with Keras and PyTorch for prediction and data analysis.
+              I'm a final-year Computer Science student at La Trobe University who enjoys building end-to-end products from responsive UIs to scalable backends. My main stack is React, Node.js, and JavaScript, and I've also built machine learning and deep learning projects with Keras and PyTorch.
             </motion.p>
 
             {/* Interests Section */}
-            <motion.div variants={itemVariants} className="space-y-3">
-              <h3 className="text-lg font-semibold text-pine">I'm especially interested in:</h3>
-              <ul className="space-y-2 text-moss">
+            <motion.div variants={itemVariants} className="space-y-2">
+              <h3 className="text-sm md:text-base font-semibold text-pine">I'm especially interested in:</h3>
+              <ul className="space-y-1 text-sm md:text-base text-moss">
                 <li className="flex items-start gap-2">
-                  <span className="text-forest mt-1">▸</span>
+                  <span className="text-forest mt-0.5">▸</span>
                   <span>Full-stack web apps and developer tools</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-forest mt-1">▸</span>
-                  <span>Data-driven products with ML features (recommendation, forecasting, analytics)</span>
+                  <span className="text-forest mt-0.5">▸</span>
+                  <span>Data-driven products with ML features</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-forest mt-1">▸</span>
-                  <span>Clean, well-documented APIs and backend services</span>
+                  <span className="text-forest mt-0.5">▸</span>
+                  <span>Clean, well-documented APIs</span>
                 </li>
               </ul>
             </motion.div>
+            </div>
 
             {/* Job Line */}
             <motion.p
               variants={itemVariants}
-              className="text-lg font-medium text-pine bg-cream/50 border-l-4 border-forest px-4 py-3 rounded-r-lg"
+              className="text-sm md:text-base font-medium text-pine bg-cream/50 border-l-4 border-forest px-3 py-2 rounded-r-lg"
             >
-              Currently seeking graduate roles and internships in full-stack or ML engineering
+              Currently seeking graduate roles in full-stack or ML engineering
             </motion.p>
 
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-4 pt-4"
+              className="flex flex-wrap gap-3"
             >
               <Link href="/projects">
-                <Button size="lg" variant="outline">
+                <Button size="md" variant="outline">
                   View My Projects
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline">
+                <Button size="md" variant="outline">
                   Get in Touch
                 </Button>
               </Link>
@@ -144,7 +143,7 @@ export default function Hero() {
           >
             <motion.div
               whileHover={floatingAnimation}
-              className="relative w-full max-w-md lg:max-w-lg"
+              className="relative w-full max-w-sm lg:max-w-md"
             >
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-br from-sage/20 to-cream/30 shadow-2xl">
                 <Image
