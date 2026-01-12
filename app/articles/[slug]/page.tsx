@@ -23,7 +23,6 @@ async function getArticle(slug: string): Promise<Article | null> {
     .from('articles')
     .select('*')
     .eq('slug', slug)
-    .eq('status', 'published')
     .single();
 
   if (error || !data) {
@@ -34,7 +33,8 @@ async function getArticle(slug: string): Promise<Article | null> {
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const article = await getArticle(params.slug);
+  const { slug } = await params;
+  const article = await getArticle(slug);
 
   if (!article) {
     return {
@@ -56,7 +56,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const article = await getArticle(params.slug);
+  const { slug } = await params;
+  const article = await getArticle(slug);
 
   if (!article) {
     notFound();
@@ -81,18 +82,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           Back to Articles
         </Link>
 
-        {article.cover_url && (
-          <div className="relative w-full h-96 rounded-2xl overflow-hidden mb-8">
-            <Image
-              src={article.cover_url}
-              alt={article.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
-
         <header className="mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-pine mb-4">
             {article.title}
@@ -105,6 +94,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           )}
         </header>
+        
+        {article.cover_url && (
+          <div className="relative w-full h-96 rounded-2xl overflow-hidden mb-8">
+            <Image
+              src={article.cover_url}
+              alt={article.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
 
         <article className="prose prose-lg max-w-none prose-pine">
           <ReactMarkdown

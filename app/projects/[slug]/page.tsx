@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, ArrowLeft } from 'lucide-react';
 import { createServerClient } from '@/lib/supabaseServer';
 import Section from '@/components/ui/Section';
 import Chip from '@/components/ui/Chip';
@@ -10,6 +10,7 @@ import ProjectImageCarousel from '@/components/projects/ProjectImageCarousel';
 import TestimonialCard, { Testimonial } from '@/components/projects/TestimonialCard';
 import { Project, ProjectImage } from '@/types';
 import ReactMarkdown from 'react-markdown';
+import BackButton from '@/components/ui/BackButton';
 
 interface Params {
   params: Promise<{ slug: string }>;
@@ -55,11 +56,11 @@ export default async function ProjectPage({ params }: Params) {
   const project = await getProjectBySlug(slug);
   if (!project) return notFound();
 
-  // Prepare carousel images: cover first, then gallery images
-  const carouselImages = [
-    ...(project.cover_url ? [{ url: project.cover_url, alt: project.title }] : []),
-    ...(project.images?.map(img => ({ url: img.image_url, alt: img.alt })) || [])
-  ];
+  // Prepare carousel images from carousel_images column
+  const carouselImages = (project.carousel_images || []).map((url, index) => ({
+    url,
+    alt: `${project.title} - Image ${index + 1}`
+  }));
 
   // Mock testimonials - in real app, fetch from database
   const testimonials: Testimonial[] = [
@@ -86,9 +87,12 @@ export default async function ProjectPage({ params }: Params) {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Title and Subtitle*/}
         <div className="space-y-2">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-pine">
-            {project.title}
-          </h1>
+          <div className="flex items-center gap-3">
+            <BackButton />
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-pine">
+              {project.title}
+            </h1>
+          </div>
           <p className="text-sm md:text-base text-moss">
             {project.excerpt}
           </p>
@@ -96,7 +100,7 @@ export default async function ProjectPage({ params }: Params) {
 
         {/* Image Carousel - Full viewport height minus header */}
         {carouselImages.length > 0 && (
-          <div className="h-[calc(100vh-280px)] min-h-[400px]">
+          <div className="h-[calc(110vh-280px)] min-h-[400px]">
             <ProjectImageCarousel images={carouselImages} />
           </div>
         )}
