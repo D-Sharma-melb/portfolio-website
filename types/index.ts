@@ -7,6 +7,7 @@ export interface Project {
   repo_url?: string;
   live_url?: string;
   cover_url?: string;
+  carousel_images?: string[];
   tech_stack: string[];
   created_at: string;
   updated_at: string;
